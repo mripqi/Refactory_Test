@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   TextInput,
   TouchableOpacity,
   FlatList,
@@ -14,16 +13,12 @@ export default function sort() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [text, setText] = useState([]);
-  const [condition, setCondition] = useState(false);
 
   const handleSort = () => {
-    console.log(input);
-    setCondition(true);
     let inputArr = input.split(' ');
     let len = inputArr.length;
     let val = 0;
     let process = [];
-    console.log('initial', inputArr);
     for (let i = 0; i < len; i++) {
       for (let j = 0; j < len; j++) {
         if (inputArr[j] > inputArr[j + 1]) {
@@ -39,9 +34,6 @@ export default function sort() {
         }
       }
     }
-    console.log(val);
-    console.log(inputArr);
-    console.log('text', process);
     setText(process);
     setOutput(val);
   };
@@ -61,6 +53,7 @@ export default function sort() {
         </TouchableOpacity>
         <FlatList
           data={text}
+          keyExtractor={(item) => item.id}
           renderItem={({item}) => {
             return (
               <View>
